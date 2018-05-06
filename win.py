@@ -6,6 +6,8 @@ Created on Mon Apr 30 14:08:52 2018
 """
 import itertools as it
 
+import tkinter as tk
+
 
 #scrabble values
 hodnoty = {
@@ -88,3 +90,50 @@ def main(zoznam_pismen,dlzku_slova,zac=""):
     vys = pismena(zoznam_pismen,dlzku_slova,dlzka(dlzku_slova,dat),zac)
     #print(vys)
     beauty_out(vys,dlzku_slova)
+    
+
+def get_att():
+    dl = e_dlzka.get()
+    zp = e_pism.get()
+    vyb = e_vyber.get()
+    e_dlzka.delete(0,2)
+    e_pism.delete(0,2)
+    e_vyber.delete(0,10)
+    dat=get_words()
+    vys = pismena(vyb,int(dl),dat,zp)
+    print(vys)
+    return (zp,vyb,dl)
+    
+
+root = tk.Tk()
+root.attributes('-fullscreen', True)
+
+velkost = 15
+
+l_nazov = tk.Label(root,text='HACK GAME')
+l_nazov.config(font=("Courier", velkost))
+l_nazov.pack()
+l_pism = tk.Label(root,text='Prve pismeno')
+l_pism.config(font=("Courier", velkost))
+l_pism.pack()
+
+e_pism = tk.Entry(root)
+e_pism.pack()
+
+l_vyber = tk.Label(root,text='Pisme ktore mame')
+l_vyber.config(font=("Courier", velkost))
+l_vyber.pack()
+e_vyber = tk.Entry(root)
+e_vyber.pack()
+
+l_dlzka = tk.Label(root,text='Max dlzka')
+l_dlzka.config(font=("Courier", velkost))
+l_dlzka.pack()
+e_dlzka = tk.Entry(root)
+e_dlzka.pack()
+
+b_get = tk.Button(root,text='Najdi',command=get_att).pack()
+
+#TODO print output on screen
+
+root.mainloop()
